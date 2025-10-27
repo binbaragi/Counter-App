@@ -49,7 +49,8 @@ body: center(
       child: Center(child: text('Tap me', style: TextStyle(color: Colors.white, fontSize: 24)),
     ),
   ),
-),
+),),
+
 
 
 // Columns and Rows
@@ -241,3 +242,102 @@ body: Center(
           ),
         ),
 
+//leading is the icon on the left side of the app bar
+        leading: Icon(Icons.menu, color: Colors.white),
+
+//DRAWER 
+
+drawer: Drawer(
+        backgroundColor: Colors.teal[100],
+        child: Column(
+          children: [
+            DrawerHeader(
+              child: Icon(Icons.favorite, size: 48, color: Colors.teal[800]),
+            ),
+
+            //home page list tile
+            ListTile(
+              leading: Icon(Icons.home, color: Colors.teal[800]),
+              title: Text('H O M E'),
+              titleTextStyle: TextStyle(
+                color: Colors.teal[800],
+                fontSize: 20,
+                fontWeight: FontWeight.bold,
+              ),
+              onTap: () {
+                Navigator.pop(
+                  context,
+                ); //closes the drawer before opening new page
+                Navigator.pushNamed(context, '/homepage');
+              },
+            ),
+
+            //setings page list tile
+            ListTile(
+              leading: Icon(Icons.settings, color: Colors.teal[800]),
+              title: Text('S E T T I N G S'),
+              titleTextStyle: TextStyle(
+                color: Colors.teal[800],
+                fontSize: 20,
+                fontWeight: FontWeight.bold,
+              ),
+              onTap: () {
+                Navigator.pop(
+                  context,
+                ); //closes the drawer before opening new page
+                Navigator.pushNamed(context, '/settingspage');
+              },
+            ),
+          ],
+        ),
+      ),
+
+//BOTTOMNAVIGATORBAR
+
+bottomNavigationBar: BottomNavigationBar(
+        currentIndex: _selectedIndex,
+        onTap: _navigateBottomBar,
+        items: [
+          //home
+          BottomNavigationBarItem(icon: Icon(Icons.home), label: 'Home'),
+
+          //settings
+          BottomNavigationBarItem(
+            icon: Icon(Icons.settings),
+            label: 'Settings',
+          ),
+
+          //profile
+          BottomNavigationBarItem(icon: Icon(Icons.person), label: 'Profile'),
+        ],
+      ),
+
+  //METHOD TO SWITCH PAGES
+
+  class FirstPage extends StatefulWidget { //NEEDS TO BE STATEFULL because of the setState() 
+  const FirstPage({super.key});
+
+  @override
+  State<FirstPage> createState() => _FirstPageState();
+}
+
+class _FirstPageState extends State<FirstPage> {
+  int _selectedIndex = 0;
+
+  //keeps track of the current page to display
+  void _navigateBottomBar(int index) {
+    setState(() {
+      _selectedIndex = index;
+    });
+  }
+
+  final List _pages = [HomePage(), SettingsPage(), ProfilePage()];
+}
+
+//ROUTES 
+  routes: {
+          '/firstpage': (context) => FirstPage(),
+          '/settingspage': (context) => SettingsPage(),
+          '/homepage': (context) => HomePage(),
+          '/profilepage': (context) => ProfilePage(),
+        },
