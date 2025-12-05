@@ -247,7 +247,3 @@ routes: {
 ```
 
 ---
-
-> Documento organizado automaticamente a partir das suas anotações originais.
-
-g
